@@ -1,0 +1,11 @@
+﻿  Coordinate.cpp
+c:\users\reinhardt\desktop\pathfinding\pathfinding\coordinate.cpp(77): fatal error C1010: fin de fichier inattendue lors de la recherche d'un en-tête précompilé. N'auriez-vous pas oublié d'ajouter '#include "stdafx.h"' à votre source ?
+  PathfindingAPI.cpp
+c:\users\reinhardt\desktop\pathfinding\pathfinding\pathfindingapi.cpp(38): fatal error C1010: fin de fichier inattendue lors de la recherche d'un en-tête précompilé. N'auriez-vous pas oublié d'ajouter '#include "stdafx.h"' à votre source ?
+  PathfindingSolver.cpp
+c:\users\reinhardt\desktop\pathfinding\pathfinding\pathfindingsolver.cpp(232): fatal error C1010: fin de fichier inattendue lors de la recherche d'un en-tête précompilé. N'auriez-vous pas oublié d'ajouter '#include "stdafx.h"' à votre source ?
+  Node.cpp
+c:\users\reinhardt\desktop\pathfinding\pathfinding\node.cpp(97): fatal error C1010: fin de fichier inattendue lors de la recherche d'un en-tête précompilé. N'auriez-vous pas oublié d'ajouter '#include "stdafx.h"' à votre source ?
+  main.cpp
+c:\users\reinhardt\desktop\pathfinding\pathfinding\main.cpp(63): fatal error C1010: fin de fichier inattendue lors de la recherche d'un en-tête précompilé. N'auriez-vous pas oublié d'ajouter '#include "stdafx.h"' à votre source ?
+  Génération de code en cours...
