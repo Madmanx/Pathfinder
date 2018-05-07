@@ -25,10 +25,7 @@ namespace Pathfinder
 		int hCost = 0;
 		int gCost = 0;
 
-		virtual ~Node()
-		{
-			delete parentNode;
-		}
+		virtual ~Node();
 
 		int getfCost() const; //the fCost is the gCost+hCost so we can get it directly this way
 

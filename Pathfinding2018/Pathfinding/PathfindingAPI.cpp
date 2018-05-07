@@ -31,25 +31,26 @@ int FindPath(const int nStartX, const int nStartY,
 	const unsigned char* pMap, const int nMapWidth, const int nMapHeight,
 	int* pOutBuffer, const int nOutBufferSize)
 {
+	// Init Grid
 	Pathfinder::GridBase::GetInstance()->Init(pMap, nMapWidth, nMapHeight);
 
+	// Init start and end node
 	Pathfinder::Node startNode(nStartX, nStartY);
 	Pathfinder::Node end(nTargetX, nTargetY);
-
-	Pathfinder::PathfinderMaster::GetInstance()->RequestPathfind(&startNode, &end, [&](std::vector<Pathfinder::Node*> path) { 
+	
+	int rtVal = -1;
+	Pathfinder::PathfinderMaster::GetInstance()->RequestPathfind(&startNode, &end, [&](std::vector<Pathfinder::Node*> path) {
 		int i = 0;
 		for (auto it = path.begin(); it != path.end(); ++it)
 		{
+			pOutBuffer[i] = ((*it)->m_x + (*it)->m_y * nMapWidth);
 			i++;
-			pOutBuffer[i] = (*it)->m_x + nMapWidth * (*it)->m_y;
 		}
-		return static_cast<int>(path.size());
+		//return static_cast<int>(path.size());
+		if(static_cast<int>(path.size()) > 0)
+			rtVal =  static_cast<int>(path.size());
 	});
-	//Pathfinder::Pathfinder solver(pMap, nMapWidth, nMapHeight);
-
-	//Use a a - star alike algorithm.
-	//return solver.solveWithAStarAlgorithm(nStartX, nStartY, nTargetX, nTargetY, pOutBuffer, nOutBufferSize);
-	return -1;
+	return rtVal;
 }
 
 

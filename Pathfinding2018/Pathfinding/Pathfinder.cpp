@@ -85,7 +85,7 @@ namespace Pathfinder
 			}
 
 			//if we haven't reached our target, then we need to start looking the neighbours
-			for (auto neighbour : GetNeighbours(currentNode, true))
+			for (auto neighbour : GetNeighbours(currentNode))
 			{
 				if (std::find(closedSet.begin(), closedSet.end(), neighbour) != closedSet.end() == false)
 				{
@@ -133,7 +133,7 @@ namespace Pathfinder
 		return path;
 	}
 
-	std::vector<Node*> Pathfinder::GetNeighbours(Node *node, bool getVerticalneighbours)
+	std::vector<Node*> Pathfinder::GetNeighbours(Node *node)
 	{
 		//This is were we start taking our neighbours
 		std::vector<Node*> retList;
@@ -141,40 +141,30 @@ namespace Pathfinder
 		for (int x = -1; x <= 1; x++)
 		{
 			for (int y = -1; y <= 1; y++)
-			{
-				//If we don't want a 3d A*, then we don't search the y
-				if (!getVerticalneighbours)
-				{
-					y = 0;
-				}
-
-				if (x == 0 && y == 0)
-				{
-					//000 is the current node
-				}
-				else
-				{
+			{		
+				//000 is the current node
+				if ((x == -1 && y == 0)
+				|| (x == 0 && y == -1)
+				|| (x == 0 && y == 1)
+				|| (x == 1 && y == 0)
+				) {
 					Node *searchPos = new Node(node->m_x + x, node->m_y + y);
-					Node *newNode = GetNeighbourNode(searchPos, true, node);
+					Node *newNode = GetNeighbourNode(searchPos, node);
 
+					// basically if not out of bounds
 					if (newNode != nullptr)
-					{
 						retList.push_back(newNode);
-					}
 				}
 			}
 		}
-
 		return retList;
 
 	}
 
-	Node *Pathfinder::GetNeighbourNode(Node *adjPos, bool searchTopDown, Node *currentNodePos)
+	Node *Pathfinder::GetNeighbourNode(Node *adjPos, Node *currentNodePos)
 	{
 		//this is where the meat of it is
 		//We can add all the checks we need here to tweak the algorythm to our heart's content
-		//but first let's start from the the usual stuff you'll see in A*
-
 		Node *retVal = nullptr;
 
 		//let's take the node from the adjacent positions we passed
@@ -185,59 +175,12 @@ namespace Pathfinder
 		{
 			//we can use that node
 			retVal = node;
-		} //if not
-		else if (searchTopDown) //and we want to have 3d A*
-		{
-			//then look what the adjacent node have under him
-			adjPos->m_y -= 1;
-			Node *bottomBlock = GetNode(adjPos->m_x, adjPos->m_y);
-
-			//if there is a bottom block and we can walk on it
-			if (bottomBlock != nullptr && bottomBlock->isWalkable)
-			{
-				retVal = bottomBlock; // we can return that
-			}
-			else
-			{
-				//otherwise, we look what it has on top of it
-				adjPos->m_y += 2;
-				Node *topBlock = GetNode(adjPos->m_x, adjPos->m_y);
-				if (topBlock != nullptr && topBlock->isWalkable)
-				{
-					retVal = topBlock;
-				}
-			}
-		}
-
-		//if the node is diagonal to the current node then check the neighbouring nodes
-		//so to move diagonally, we need to have 4 nodes walkable
-		int originalX = adjPos->m_x - currentNodePos->m_x;
-		int originalY = adjPos->m_y - currentNodePos->m_y;
-
-		if (abs(originalX) == 1 && abs(originalY) == 1)
-		{
-			// the first block is originalX, 0 and the second to check is 0, originalZ
-			//They need to be pathfinding walkable
-			Node *neighbour1 = GetNode(currentNodePos->m_x + originalX, currentNodePos->m_y);
-			if (neighbour1 == nullptr || !neighbour1->isWalkable)
-			{
-				retVal = nullptr;
-			}
-
-			Node *neighbour2 = GetNode(currentNodePos->m_x, currentNodePos->m_y);
-			if (neighbour2 == nullptr || !neighbour2->isWalkable)
-			{
-				retVal = nullptr;
-			}
 		}
 
 		//and here's where we can add even more additional checks
 		if (retVal != nullptr)
 		{
-			//Example, do not approach a node from the left
-			/*if(node.x > currentNodePos.x) {
-			node = null;
-			}*/
+			// nothing yet
 		}
 
 		return retVal;

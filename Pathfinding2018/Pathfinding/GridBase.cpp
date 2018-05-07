@@ -24,7 +24,7 @@ namespace Pathfinder
 			{
 				Node *node = new Node(x, y);
 				
-				if (pMap[x + y] == 1) {
+				if (pMap[x + y*nMapWidth] == 0) {
 					node->isWalkable = false;
 				}
 

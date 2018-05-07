@@ -24,6 +24,11 @@ namespace Pathfinder
 
 	}
 
+	Node::~Node() {
+		//if(parentNode != nullptr)
+		//delete parentNode;
+	}
+
 	bool Node::Equals(Node* n) {
 		return (this->m_x == n->m_x && this->m_y == n->m_y);
 	}

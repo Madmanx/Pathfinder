@@ -5,6 +5,7 @@
 #include <functional>
 #include "PathfinderMaster.h"
 
+
 namespace Pathfinder { class Node; }
 namespace Pathfinder { class GridBase; }
 
@@ -43,9 +44,9 @@ namespace Pathfinder
 
 		std::vector<Node*> RetracePath(Node *startNode, Node *endNode);
 
-		std::vector<Node*> GetNeighbours(Node *node, bool getVerticalneighbours = false);
+		std::vector<Node*> GetNeighbours(Node *node);
 
-		Node *GetNeighbourNode(Node *adjPos, bool searchTopDown, Node *currentNodePos);
+		Node *GetNeighbourNode(Node *adjPos, Node *currentNodePos);
 
 		Node *GetNode(int x, int y);
 
