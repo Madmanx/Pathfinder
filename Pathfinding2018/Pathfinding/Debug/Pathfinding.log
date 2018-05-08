@@ -1,3 +1,8 @@
-﻿  Pathfinder.cpp
-  Pathfinding.vcxproj -> C:\Users\Etudiant2\Desktop\Pathfinding2018\Pathfinding\Debug\Pathfinding.exe
-  Pathfinding.vcxproj -> C:\Users\Etudiant2\Desktop\Pathfinding2018\Pathfinding\Debug\Pathfinding.pdb (Partial PDB)
+﻿  stdafx.cpp
+  PathfindingAPI.cpp
+  PathfinderMaster.cpp
+  Pathfinder.cpp
+  Node.cpp
+  GridBase.cpp
+  Génération de code en cours...
+  Pathfinding.vcxproj -> C:\Users\Reinhardt\Desktop\Pathfinding\Pathfinder\Pathfinding2018\Debug\Pathfinding.lib

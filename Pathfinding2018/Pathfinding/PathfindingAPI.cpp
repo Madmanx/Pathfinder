@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //
-//  Last Edition:    16/10/2015
+//  Last Edition:    08/05/2018
 //  Filename:		 pathfindingAPI.cpp
 //  Author:			 Remi Boscher
 //
@@ -9,13 +9,16 @@
 //  purpose:		 Pathfinding exercice for Paradox Interactive
 //
 ///////////////////////////////////////////////////////////////////////////////
+
 #include "stdafx.h"
 #include "PathfindingAPI.h"
 #include "GridBase.h"
 #include "PathfinderMaster.h"
-#include <iostream>
+//#include <iostream>
 
-using PathfindingJobComplete = std::function<void(std::vector<Pathfinder::Node*> &path)>;
+using namespace std;
+
+using PathfindingJobComplete = function<void(vector<Pathfinder::Node*> &path)>;
 /**
 nStartX, nStarty start position
 nTargetX, nTargetY target position
@@ -45,6 +48,8 @@ int FindPath(const int nStartX, const int nStartY,
 		{
 			pOutBuffer[i] = ((*it)->m_x + (*it)->m_y * nMapWidth);
 			i++;
+			if (i >= nOutBufferSize)
+				break;
 		}
 		//return static_cast<int>(path.size());
 		if(static_cast<int>(path.size()) > 0)

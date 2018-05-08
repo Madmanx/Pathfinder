@@ -7,11 +7,12 @@
 #include <thread>         // std::thread
 #include <mutex>  // std::mutex, std::lock
 
-std::mutex mtx;
+using namespace std;
+
+mutex mtx;
 
 namespace Pathfinder
 {
-
 	Pathfinder::Pathfinder(Node *start, Node *target, PathfindingJobComplete callback)
 	{
 		startPosition = start;
@@ -20,6 +21,7 @@ namespace Pathfinder
 		gridBase = GridBase::GetInstance();
 	}
 
+	// Job started
 	void Pathfinder::FindPath()
 	{
 		foundPath = FindPathActual(startPosition, endPosition);
@@ -27,6 +29,7 @@ namespace Pathfinder
 		jobDone = true;
 	}
 
+	// Notify -> all the way back to lamba function in PathfindingAPI
 	void Pathfinder::NotifyComplete()
 	{
 		if (completeCallback != nullptr)
@@ -35,15 +38,14 @@ namespace Pathfinder
 		}
 	}
 
-	std::vector<Node*> Pathfinder::FindPathActual(Node *start, Node *target)
+	vector<Node*> Pathfinder::FindPathActual(Node *start, Node *target)
 	{
 		//Typical A* algorythm from here and on
-
-		std::vector<Node*> foundPath;
+		vector<Node*> foundPath;
 
 		//We need two lists, one for the nodes we need to check and one for the nodes we've already checked
-		std::vector<Node*> openSet;
-		std::unordered_set<Node*> closedSet;
+		vector<Node*> openSet;
+		unordered_set<Node*> closedSet;
 
 		//We start adding to the open set
 		openSet.push_back(start);
@@ -87,13 +89,13 @@ namespace Pathfinder
 			//if we haven't reached our target, then we need to start looking the neighbours
 			for (auto neighbour : GetNeighbours(currentNode))
 			{
-				if (std::find(closedSet.begin(), closedSet.end(), neighbour) != closedSet.end() == false)
+				if (find(closedSet.begin(), closedSet.end(), neighbour) != closedSet.end() == false)
 				{
 					//we create a new movement cost for our neighbours
 					int newMovementCostToNeighbour = currentNode->gCost + GetDistance(currentNode, neighbour);
 
 					//and if it's lower than the neighbour's cost
-					if (newMovementCostToNeighbour < neighbour->gCost || (std::find(openSet.begin(), openSet.end(), neighbour) != openSet.end() == false))
+					if (newMovementCostToNeighbour < neighbour->gCost || (find(openSet.begin(), openSet.end(), neighbour) != openSet.end() == false))
 					{
 						//we calculate the new costs
 						neighbour->gCost = newMovementCostToNeighbour;
@@ -101,7 +103,7 @@ namespace Pathfinder
 						//Assign the parent node
 						neighbour->parentNode = currentNode;
 						//And add the neighbour node to the open set
-						if (std::find(openSet.begin(), openSet.end(), neighbour) != openSet.end() == false)
+						if (find(openSet.begin(), openSet.end(), neighbour) != openSet.end() == false)
 						{
 							openSet.push_back(neighbour);
 						}
@@ -114,10 +116,10 @@ namespace Pathfinder
 		return foundPath;
 	}
 
-	std::vector<Node*> Pathfinder::RetracePath(Node *startNode, Node *endNode)
+	vector<Node*> Pathfinder::RetracePath(Node *startNode, Node *endNode)
 	{
 		//Retrace the path, is basically going from the endNode to the startNode
-		std::vector<Node*> path;
+		vector<Node*> path;
 		Node *currentNode = endNode;
 
 		while (currentNode != startNode)
@@ -128,15 +130,15 @@ namespace Pathfinder
 		}
 
 		//then we simply reverse the list
-		std::reverse(path.begin(), path.end());
+		reverse(path.begin(), path.end());
 
 		return path;
 	}
 
-	std::vector<Node*> Pathfinder::GetNeighbours(Node *node)
+	vector<Node*> Pathfinder::GetNeighbours(Node *node)
 	{
 		//This is were we start taking our neighbours
-		std::vector<Node*> retList;
+		vector<Node*> retList;
 
 		for (int x = -1; x <= 1; x++)
 		{
@@ -190,6 +192,7 @@ namespace Pathfinder
 	{
 		Node *n = nullptr;
 
+		// multi access on grid
 		mtx.lock();
 		if (gridBase)
 		{
@@ -213,7 +216,6 @@ namespace Pathfinder
 		{
 			return distY + (distX - distY);
 		}
-
 		return distX + (distY - distX);
 	}
 }

@@ -1,4 +1,14 @@
-
+///////////////////////////////////////////////////////////////////////////////
+//
+//  Last Edition:    08/05/2015
+//  Filename:		 gridbase.cpp
+//  Author:			 Remi Boscher
+//
+//=============================================================================
+//
+//  purpose:		 Pathfinding exercice for Paradox Interactive
+//
+///////////////////////////////////////////////////////////////////////////////
 #include "stdafx.h"
 #include "GridBase.h"
 #include "Node.h"

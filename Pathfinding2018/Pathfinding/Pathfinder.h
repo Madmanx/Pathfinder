@@ -9,9 +9,12 @@
 namespace Pathfinder { class Node; }
 namespace Pathfinder { class GridBase; }
 
+using namespace std;
+
 namespace Pathfinder
 {
-	using PathfindingJobComplete = std::function<void(std::vector<Node*> &path)>;
+	// Redefine two many times ?  ? ? 
+	using PathfindingJobComplete = function<void(vector<Node*> &path)>;
 	class Pathfinder
 	{
 	public:
@@ -20,15 +23,13 @@ namespace Pathfinder
 		Node * startPosition;
 		Node *endPosition;
 
-		//ORIGINAL LINE: public volatile bool jobDone = false;
 		bool /*volatile*/ jobDone = false;
 		PathfindingJobComplete completeCallback;
-		std::vector<Node*> foundPath;
+		vector<Node*> foundPath;
 
 		//Constructor
 		virtual ~Pathfinder()
 		{
-//			delete gridBase;
 			delete startPosition;
 			delete endPosition;
 		}
@@ -40,12 +41,14 @@ namespace Pathfinder
 		void NotifyComplete();
 
 	private:
-		std::vector<Node*> FindPathActual(Node *start, Node *target);
+		vector<Node*> FindPathActual(Node *start, Node *target);
 
-		std::vector<Node*> RetracePath(Node *startNode, Node *endNode);
+		// Retrace path using parent node
+		vector<Node*> RetracePath(Node *startNode, Node *endNode);
 
-		std::vector<Node*> GetNeighbours(Node *node);
+		vector<Node*> GetNeighbours(Node *node);
 
+		// Retrieve a node, insert controls here
 		Node *GetNeighbourNode(Node *adjPos, Node *currentNodePos);
 
 		Node *GetNode(int x, int y);

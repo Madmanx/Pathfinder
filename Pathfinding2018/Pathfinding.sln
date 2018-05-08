@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.12
+VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Pathfinding", "Pathfinding\Pathfinding.vcxproj", "{B5D7D2F2-90CA-4EF3-B014-1C486434B5FA}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestPathfinding", "TestPathfinding\TestPathfinding.vcxproj", "{514D30A2-B144-47AF-BBC2-C2A693BE6C30}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,8 +23,19 @@ Global
 		{B5D7D2F2-90CA-4EF3-B014-1C486434B5FA}.Release|x64.Build.0 = Release|x64
 		{B5D7D2F2-90CA-4EF3-B014-1C486434B5FA}.Release|x86.ActiveCfg = Release|Win32
 		{B5D7D2F2-90CA-4EF3-B014-1C486434B5FA}.Release|x86.Build.0 = Release|Win32
+		{514D30A2-B144-47AF-BBC2-C2A693BE6C30}.Debug|x64.ActiveCfg = Debug|x64
+		{514D30A2-B144-47AF-BBC2-C2A693BE6C30}.Debug|x64.Build.0 = Debug|x64
+		{514D30A2-B144-47AF-BBC2-C2A693BE6C30}.Debug|x86.ActiveCfg = Debug|Win32
+		{514D30A2-B144-47AF-BBC2-C2A693BE6C30}.Debug|x86.Build.0 = Debug|Win32
+		{514D30A2-B144-47AF-BBC2-C2A693BE6C30}.Release|x64.ActiveCfg = Release|x64
+		{514D30A2-B144-47AF-BBC2-C2A693BE6C30}.Release|x64.Build.0 = Release|x64
+		{514D30A2-B144-47AF-BBC2-C2A693BE6C30}.Release|x86.ActiveCfg = Release|Win32
+		{514D30A2-B144-47AF-BBC2-C2A693BE6C30}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4CC7C106-58EE-4892-83B7-4E6A071A7DC0}
 	EndGlobalSection
 EndGlobal
